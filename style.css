@@ -1,6 +1,8 @@
 
 
-
+a{
+    color: inherit;
+}
 #title{
     margin-top : 1em;
     display: flex;
@@ -31,5 +33,55 @@
 }
 
 .news {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #404042;
+    margin-top: 10px;
+}
+
+#menuIcon {
+    position:absolute;
+    left : 10px;
+    display: none;
+    font-size: 25px;
+    margin-top: 6px;
+}
+
+#searchIcon{
+    position:absolute;
+    left: 35px;
+    margin-top: 6px;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 768px){
+	.menus {
+	  display: none;
+	  flex-direction : column;
+	  align-items: flex-start;
+	  width: 100%;
+	}
+	#menuIcon {
+	  display: block;
+	}	
+	.menus.active{
+		display: flex;
+	}				
+}
+
+#inputArea {
+    position:absolute;
+    left : 65px;
+    display: none;
+}
+
+#searchInput {
+    border-radius: 5px;
+    border : 2px solid #404042;
+    padding: 6px;
+    margin-left: 5px;
+}
+
+.searchBtn {
+    position: absolute;
+    margin-left: 5px;
 }

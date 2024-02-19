@@ -12,3 +12,25 @@ const getLatesNews = async ()=>{
 };
 
 getLatesNews();
+
+
+
+// menu 
+const toggleBtn = document.querySelector('.navbar-togglebtn');
+const menu = document.querySelector('.menus');
+
+toggleBtn.addEventListener('click', () => {
+	
+	menu.classList.toggle('active');
+	
+});
+
+// search
+const openSearch = () => {
+    let inputArea = document.getElementById("inputArea");
+    if (inputArea.style.display === "inline") {
+      inputArea.style.display = "none";
+    } else {
+      inputArea.style.display = "inline";
+    }
+  };
