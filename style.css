@@ -39,7 +39,7 @@ a{
 
 #menuIcon {
     position:absolute;
-    left : 10px;
+    left : 15px;
     display: none;
     font-size: 25px;
     margin-top: 6px;
@@ -47,7 +47,7 @@ a{
 
 #searchIcon{
     position:absolute;
-    left: 35px;
+    left: 40px;
     margin-top: 6px;
     cursor: pointer;
     font-size: 25px;
@@ -65,13 +65,25 @@ a{
 	}	
 	.menus.active{
 		display: flex;
-	}				
+	}
+    #title img{
+        width:180px;
+    }
+    #menuIcon{
+        margin-top : 15px;
+    }
+    #searchIcon{
+        display: none;
+    }				
 }
 
 #inputArea {
     position:absolute;
-    left : 65px;
+    left : 70px;
     display: none;
+}
+#inputArea.active {
+    display: inline;
 }
 
 #searchInput {

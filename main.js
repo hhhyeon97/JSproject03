@@ -15,9 +15,12 @@ getLatesNews();
 
 
 
+
+
 // menu 
 const toggleBtn = document.querySelector('.navbar-togglebtn');
 const menu = document.querySelector('.menus');
+
 
 toggleBtn.addEventListener('click', () => {
 	
