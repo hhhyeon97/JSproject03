@@ -8,7 +8,9 @@ a{
     display: flex;
     justify-content: center;
 }
-
+#title img {
+    cursor: pointer;
+}
 .menus {
     margin-top: 1em;
     display: flex;
@@ -70,20 +72,17 @@ a{
         width:180px;
     }
     #menuIcon{
-        margin-top : 15px;
+        margin-top : 13px;
     }
     #searchIcon{
         display: none;
-    }				
+    }		
 }
 
 #inputArea {
     position:absolute;
     left : 70px;
     display: none;
-}
-#inputArea.active {
-    display: inline;
 }
 
 #searchInput {
