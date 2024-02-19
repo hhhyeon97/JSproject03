@@ -1,10 +1,10 @@
 
-//const API_KEY = 'my api key...'
+//const API_KEY = 'my key...'
 
 let newsList = []
 
 const getLatesNews = async ()=>{
-    const url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=5`);
+    const url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=3`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -21,17 +21,17 @@ getLatesNews();
 const render=()=>{
     const newsHTML = newsList.map(item => {
 
-        let imageUrl = item.urlToImage ? item.urlToImage : 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'; // 이미지가 없는 경우 대체 이미지 사용
+        let imageUrl = item.urlToImage ? item.urlToImage : 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg';
         let desc = item.description ? (item.description.length > 200 ? item.description.substring(0, 200) + '...' : item.description) : '내용 없음';
         let sc = item.source.name ? item.source.name : 'no source';
 
         return `
             <div class="row news">
-                <div class="col-lg-4" style="margin-bottom: 10px;">
+                <div class="col-lg-4" style="margin-bottom: 15px;">
                     <img class="newsImage" src="${imageUrl}" alt="img">
                 </div>
                 <div class="col-lg-8">
-                    <h2>${item.title}</h2>
+                    <h3>${item.title}</h3>
                     <p>${desc}</p>
                     <div>
                         ${sc} ·  ${moment(

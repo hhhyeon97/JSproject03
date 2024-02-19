@@ -8,9 +8,7 @@ a{
     display: flex;
     justify-content: center;
 }
-#title img {
-    cursor: pointer;
-}
+
 .menus {
     margin-top: 1em;
     display: flex;
@@ -23,6 +21,7 @@ a{
     border : none;
     background : none;
     margin : 5px;
+    transition: 0.2s;
 }
 
 .menus button:hover {
@@ -37,8 +36,9 @@ a{
 }
 
 .news {
-    border-bottom: 2px solid #404042;
-    margin-top: 10px;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 10px;
+    margin-top: 20px;
 }
 
 #menuIcon {
@@ -97,4 +97,12 @@ a{
 .searchBtn {
     position: absolute;
     margin-left: 5px;
+}
+
+footer {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
