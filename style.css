@@ -62,6 +62,13 @@ a{
     font-size: 25px;
 }
 
+#mobileSearch {
+    display: none;
+}
+#mobileSearch input {
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 768px){
 	.menus {
 	  display: none;
@@ -83,7 +90,10 @@ a{
     }
     #searchIcon,#searchInput,.searchBtn{
         display: none;
-    }		
+    }
+    #mobileSearch {
+        display: block;
+    }	
 }
 
 #inputArea {
@@ -137,3 +147,4 @@ footer {
 footer h3{
     font-weight: bold;
 }
+

@@ -14,10 +14,10 @@ const getNews = async()=>{
     const data = await response.json(); // json 형태로 뽑는다
 
     if(response.status===200){
-        /*
+        
         if(data.articles.length===0){
             throw new Error("No result for this search");
-        }*/
+        }
         newsList = data.articles; // 뽑은 데이터를 배열에 담는다
         render(); // 화면에 보여준다
     }else{
@@ -125,6 +125,21 @@ const searchNews = async()=>{
     getNews();
 }
 
+// 모바일 검색 기능
+const mobileInputField = document.getElementById("mobileInput");
+const mobileSearchNews = async()=>{
+    const keyword = mobileInputField.value.trim(); // 입력값에서 공백 제거
+    if (keyword === "") { // 공백 입력하면 
+        mobileInputField.value = ""; // 입력창 비우기 
+        alert('검색어를 입력하세요!'); // 알림창
+        mobileInputField.focus(); // 입력창으로 포커스
+        return; // 검색 중지
+    }
+    url = new URL(`https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}`)
+
+    getNews();
+}
+
 // 로고 클릭 시 다시 리셋되게 
 const totalNewsWrapper = document.querySelector("#title");
 const logoImage = totalNewsWrapper.querySelector("#totalNews");
@@ -137,6 +152,11 @@ inputField.addEventListener("keydown", function(event) {
     // 엔터 키를 눌렀을 때
     if (event.key === "Enter") {
         // 검색 실행
+        searchNews();
+    }
+});
+mobileInputField.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
         searchNews();
     }
 });
