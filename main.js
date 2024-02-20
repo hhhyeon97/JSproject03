@@ -7,12 +7,26 @@ menus.forEach(menu=>menu.addEventListener("click",()=>getNewsByCategory(event)))
 
 let url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=3`);
 
-// 중복되는 코드 묶기
+// 중복되는 코드 묶기+에러 핸들링
 const getNews = async()=>{
+    try {
     const response = await fetch(url); // url 부른다
     const data = await response.json(); // json 형태로 뽑는다
-    newsList = data.articles; // 뽑은 데이터를 배열에 담는다
-    render(); // 화면에 보여준다
+
+    if(response.status===200){
+        /*
+        if(data.articles.length===0){
+            throw new Error("No result for this search");
+        }*/
+        newsList = data.articles; // 뽑은 데이터를 배열에 담는다
+        render(); // 화면에 보여준다
+    }else{
+        throw new Error(data.message)
+    }    
+    }catch(error){
+        console.log("error",error.message)
+        errorRender(error.message);
+    }
 }
 
 // 기본 뉴스 
@@ -20,6 +34,7 @@ const getLatesNews = async ()=>{
     url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=3`);
     getNews();
 };
+// 함수 호출
 getLatesNews();
 
 
@@ -67,6 +82,15 @@ const render = () => {
         document.getElementById("newsBoard").innerHTML = newsHTML;
     }
 }
+
+// 에러 랜더링
+const errorRender =(errorMessage)=>{
+    const errorHTML =`<div class="alert alert-danger" role="alert">
+    ${errorMessage}</div>`;
+
+    document.getElementById("newsBoard").innerHTML=errorHTML;
+}
+
 
 // 메뉴바
 const toggleBtn = document.querySelector('.navbar-togglebtn');
