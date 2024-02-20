@@ -92,8 +92,16 @@ const openSearch = () => {
   };
 
 // 검색 기능
+const inputField = document.getElementById("searchInput");
 const searchNews = async()=>{
-    const keyword = document.getElementById("searchInput").value;
+    const keyword = inputField.value.trim(); // 입력값에서 공백 제거
+    if (keyword === "") { // 공백 입력하면 
+        inputField.value = ""; // 입력창 비우기 
+        alert('검색어를 입력하세요!'); // 알림창
+        inputField.focus(); // 입력창으로 포커스
+        return; // 검색 중지
+    }
+
     console.log("키워드",keyword);
     const url = new URL(`https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}`)
     const response = await fetch(url) // url 부른다
@@ -101,6 +109,29 @@ const searchNews = async()=>{
     console.log("키워드 data",data)
     
     newsList = data.articles; // 검색결과를 다시 리스트에 담기 
-
+    // 검색 결과가 없을 때 
+    if(newsList.length==0){
+        let message = document.getElementById("message");
+        message.textContent = '결과 없음';
+    }
+    
     render()  // 렌더링
 }
+
+
+// 로고 클릭 시 다시 리셋되게 
+const totalNewsWrapper = document.querySelector("#title");
+const logoImage = totalNewsWrapper.querySelector("#totalNews");
+logoImage.addEventListener("click", () => {
+    location.reload();
+});
+
+
+// 검색어 입력 창에 이벤트 리스너 추가
+inputField.addEventListener("keydown", function(event) {
+    // 엔터 키를 눌렀을 때
+    if (event.key === "Enter") {
+        // 검색 실행
+        searchNews();
+    }
+});
