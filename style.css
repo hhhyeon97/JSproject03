@@ -64,9 +64,20 @@ a{
 
 #mobileSearch {
     display: none;
+    margin-left: 5px;
 }
 #mobileSearch input {
-    border-radius: 5px;
+    border: 2px solid lightgray;
+    border-radius: 6px;
+    outline: none;
+}
+#mobileSearch button {
+    border : 2px solid lightgray;
+    border-radius: 6px;
+}
+#mobileSearch button:hover {
+    background-color: white;
+    color:black;
 }
 
 @media screen and (max-width: 768px){

@@ -215,6 +215,6 @@ inputField.addEventListener("keydown", function(event) {
 });
 mobileInputField.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        searchNews();
+        mobileSearchNews();
     }
 });
