@@ -122,13 +122,25 @@ const paginationRender=()=>{
     // firstPage
     const firstPage = lastPage - (groupSize-1)<=0? 1: lastPage - (groupSize-1);
 
-    let paginationHTML=''
+    let paginationHTML = "";
 
-    for(let i=firstPage;i<=lastPage;i++){
-        paginationHTML+=`<li class="page-item ${i===page?"active" : ""}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>
-        `
+    // 첫번째 페이지일 때를 제외하고 이전 링크 보이게 하기
+    if (page !== 1) {
+        paginationHTML += `<li class="page-item" onclick="moveToPage(${page - 1})"><a class="page-link">Previous</a></li>`;
     }
-    document.querySelector(".pagination").innerHTML=paginationHTML;
+
+    // 페이지 번호 추가
+    for (let i = firstPage; i <= lastPage; i++) {
+        paginationHTML += `<li class="page-item ${i === page ? "active" : ""}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+    }
+
+    // 마지막 페이지일 때 제외하고 다음 기능 보이게 하기 
+    if (page !== totalPages) {
+        paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">Next</a></li>`;
+    }
+
+    document.querySelector(".pagination").innerHTML = paginationHTML;
+
 }
 
 const moveToPage=(pageNum)=>{
