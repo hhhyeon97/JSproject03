@@ -5,7 +5,14 @@ let newsList = []
 const menus = document.querySelectorAll(".menus button")
 menus.forEach(menu=>menu.addEventListener("click",()=>getNewsByCategory(event)))
 
-let url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=3`);
+let url = new URL(`https://jspractice03.netlify.app/top-headlines?`);
+
+// 페이징과 관련한 변수 설정
+let totalResults = 0
+let page = 1
+const pageSize = 10
+const groupSize = 5
+
 
 // 중복되는 코드 묶기+에러 핸들링
 const getNews = async()=>{
@@ -19,7 +26,9 @@ const getNews = async()=>{
             throw new Error("No result for this search");
         }
         newsList = data.articles; // 뽑은 데이터를 배열에 담는다
+        totalResult = data.totalResults; // 페이징을 위해 totalResult 데이터 담기
         render(); // 화면에 보여준다
+        paginationRender(); // 화면 렌더 후 페이징도 보여준다
     }else{
         throw new Error(data.message)
     }    
@@ -89,6 +98,30 @@ const errorRender =(errorMessage)=>{
     ${errorMessage}</div>`;
 
     document.getElementById("newsBoard").innerHTML=errorHTML;
+}
+
+
+// pagination 
+const paginationRender=()=>{
+    // totalResult
+    // page
+    // pageSize
+
+    // pageGroup
+    const pageGroup = Math.ceil(page/groupSize);
+    // lastPage
+    const lastPage = pageGroup * groupSize
+    // firstPage
+    const firstPage = lastPage - (groupSize-1)
+    // totalPage
+
+    let paginationHTML=''
+
+    for(let i=firstPage;i<=lastPage;i++){
+        paginationHTML+=`<li class="page-item"><a class="page-link" href="#">${i}</a></li>
+        `
+    }
+    document.querySelector(".pagination").innerHTML=paginationHTML;
 }
 
 
