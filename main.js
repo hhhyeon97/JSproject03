@@ -8,7 +8,7 @@ menus.forEach(menu=>menu.addEventListener("click",()=>getNewsByCategory(event)))
 let url = new URL(`https://jspractice03.netlify.app/top-headlines?`);
 
 // 페이징과 관련한 변수 설정
-let totalResults = 0
+let totalResult = 0
 let page = 1
 const pageSize = 10
 const groupSize = 5
@@ -17,8 +17,11 @@ const groupSize = 5
 // 중복되는 코드 묶기+에러 핸들링
 const getNews = async()=>{
     try {
-    const response = await fetch(url); // url 부른다
-    const data = await response.json(); // json 형태로 뽑는다
+        url.searchParams.set("page",page); // - > &page=page 와 같다
+        url.searchParams.set("pageSize",pageSize);
+        
+        const response = await fetch(url); // url 부른다
+        const data = await response.json(); // json 형태로 뽑는다
 
     if(response.status===200){
         
@@ -106,22 +109,32 @@ const paginationRender=()=>{
     // totalResult
     // page
     // pageSize
-
+    // totalPages
+    const totalPages = Math.ceil(totalResult/pageSize);
     // pageGroup
     const pageGroup = Math.ceil(page/groupSize);
     // lastPage
-    const lastPage = pageGroup * groupSize
+    const lastPage = pageGroup * groupSize;
+    //마지막 페이지그룹이 그룹사이즈보다 작을 경우 lastPage = totalPage 처리
+    if(lastPage > totalPages){
+        lastPage=totalPages
+    }
     // firstPage
-    const firstPage = lastPage - (groupSize-1)
-    // totalPage
+    const firstPage = lastPage - (groupSize-1)<=0? 1: lastPage - (groupSize-1);
 
     let paginationHTML=''
 
     for(let i=firstPage;i<=lastPage;i++){
-        paginationHTML+=`<li class="page-item"><a class="page-link" href="#">${i}</a></li>
+        paginationHTML+=`<li class="page-item ${i===page?"active" : ""}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>
         `
     }
     document.querySelector(".pagination").innerHTML=paginationHTML;
+}
+
+const moveToPage=(pageNum)=>{
+    console.log("move to page",pageNum);
+    page = pageNum; // page값 유동적으로 변경
+    getNews()
 }
 
 

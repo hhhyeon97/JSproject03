@@ -148,3 +148,14 @@ footer h3{
     font-weight: bold;
 }
 
+.pagination li {
+    cursor: pointer;
+}
+.page-item .page-link {
+    color: black;
+}
+.page-item.active .page-link {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
