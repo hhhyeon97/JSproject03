@@ -57,6 +57,7 @@ getLateNews();
 // 카테고리 
 const getNewsByCategory = async(event)=>{
     const category = event.target.textContent.toLowerCase();
+    page = 1;
     console.log("category",category);
     url = new URL(`https://jspractice03.netlify.app/top-headlines?category=${category}`)
     getNews();
@@ -175,6 +176,7 @@ const openSearch = () => {
 // 검색 기능
 const inputField = document.getElementById("searchInput");
 const searchNews = async()=>{
+    page = 1;
     const keyword = inputField.value.trim(); // 입력값에서 공백 제거
     if (keyword === "") { // 공백 입력하면 
         inputField.value = ""; // 입력창 비우기 
@@ -191,6 +193,7 @@ const searchNews = async()=>{
 // 모바일 검색 기능
 const mobileInputField = document.getElementById("mobileInput");
 const mobileSearchNews = async()=>{
+    page = 1;
     const keyword = mobileInputField.value.trim(); // 입력값에서 공백 제거
     if (keyword === "") { // 공백 입력하면 
         mobileInputField.value = ""; // 입력창 비우기 

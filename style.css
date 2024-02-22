@@ -80,7 +80,8 @@ a{
     color:black;
 }
 
-@media screen and (max-width: 768px){
+/*768*/
+@media screen and (max-width: 950px){
 	.menus {
 	  display: none;
 	  flex-direction : column;
