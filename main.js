@@ -76,9 +76,7 @@ const render = () => {
 		</div>
 	</div>`
 	).join('');
-
 	document.getElementById('newsBoard').innerHTML = newsHtml;
-
 	};
 
 // 이미지 에러 핸들링
@@ -87,16 +85,14 @@ const imgError = (image) => {
         image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU";
 };
 
-
-
 // 에러 랜더링
 const errorRender =(errorMessage)=>{
-    const errorHTML =`<div class="alert alert-danger" style="text-align:center;" role="alert">
+    const errorHTML =`<div class="alert alert-dark" style="text-align:center; margin-top: 20px;" role="alert">
     ${errorMessage}</div>`;
-
     document.getElementById("newsBoard").innerHTML=errorHTML;
-    document.querySelector(".pagination").style.display = "none"; // 에러메세지가 뜰 때만 페이징 부분 숨기기
+    //document.querySelector(".pagination").style.display = "none"; // 에러메세지가 뜰 때만 페이징 부분 숨기기
 }
+
 
 // pagination 
 const paginationRender=()=>{
