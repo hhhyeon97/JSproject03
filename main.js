@@ -30,7 +30,7 @@ const getNews = async()=>{
     if(response.status===200){
         
         if(data.articles.length===0){
-            throw new Error("No result for this search");
+            throw new Error("검색 결과가 없습니다.");
         }
         newsList = data.articles; // 뽑은 데이터를 배열에 담는다
         totalResult = data.totalResults; // 페이징을 위해 totalResult 데이터 담기
@@ -63,49 +63,39 @@ const getNewsByCategory = async(event)=>{
     getNews();
 }
 
-// 뉴스 랜더링
+// 뉴스 보여주기
 const render = () => {
-    if (newsList.length === 0) { // 검색 결과가 없을 때
-        document.getElementById("newsBoard").innerHTML = `
-            <div class="no-results">
-            '<span class="highlight">${inputField.value}</span>'에 대한 검색 결과가 없습니다.
-            </div>
-        `;
-    } else { // 검색 결과가 있을 때
-        const newsHTML = newsList.map(item => {
+	const newsHtml = newsList.map(news => `<div class="row news">
+		<div class="col-lg-4" style="margin-bottom: 15px;">
+			<img src="${news.urlToImage}" alt="뉴스 이미지" class="newsImage" onerror="imgError(this)">
+		</div>
+		<div class="col-lg-8">
+			<h3>${news.title}</h3>
+			<p>${news.description == null || news.description == "" ? "내용없음": news.description.length > 200 ? news.description.substring(0, 200) + "..." : news.description}</p>
+			<div>${news.source.name || "no source"}  ${moment(news.publishedAt).fromNow()}</div>			
+		</div>
+	</div>`
+	).join('');
 
-            let imageUrl = item.urlToImage ? item.urlToImage : 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg';
-            let desc = item.description ? (item.description.length > 200 ? item.description.substring(0, 200) + '...' : item.description) : '내용 없음';
-            let sc = item.source.name ? item.source.name : 'no source';
+	document.getElementById('newsBoard').innerHTML = newsHtml;
 
-            return `
-                <div class="row news">
-                    <div class="col-lg-4" style="margin-bottom: 15px;">
-                        <img class="newsImage" src="${imageUrl}" alt="img">
-                    </div>
-                    <div class="col-lg-8">
-                        <h3>${item.title}</h3>
-                        <p>${desc}</p>
-                        <div>
-                            ${sc} ·  ${moment(
-                                item.publishedAt
-                            ).fromNow()}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
+	};
 
-        document.getElementById("newsBoard").innerHTML = newsHTML;
-    }
-}
+// 이미지 에러 핸들링
+const imgError = (image) => {
+        image.onerror = null; // 이미지 에러 핸들러를 중복 호출하지 않도록 이벤트 리스너 제거
+        image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU";
+};
+
+
 
 // 에러 랜더링
 const errorRender =(errorMessage)=>{
-    const errorHTML =`<div class="alert alert-danger" role="alert">
+    const errorHTML =`<div class="alert alert-danger" style="text-align:center;" role="alert">
     ${errorMessage}</div>`;
 
     document.getElementById("newsBoard").innerHTML=errorHTML;
+    document.querySelector(".pagination").style.display = "none"; // 에러메세지가 뜰 때만 페이징 부분 숨기기
 }
 
 // pagination 
@@ -226,3 +216,25 @@ mobileInputField.addEventListener("keydown", function(event) {
         mobileSearchNews();
     }
 });
+
+
+// 페이지 전환 함수
+const nextPage = () => {
+    const newsBoard = document.getElementById("newsBoard");
+    newsBoard.classList.add("fadeOut");
+    setTimeout(() => {
+        // 여기에 페이지 전환 코드 추가
+        // 예: 다음 페이지로 이동하는 로직 추가
+        newsBoard.classList.remove("fadeOut");
+    }, 500); // 애니메이션 지속 시간과 일치해야 함 (여기서는 0.5초)
+}
+
+const prevPage = () => {
+    const newsBoard = document.getElementById("newsBoard");
+    newsBoard.classList.add("fadeOut");
+    setTimeout(() => {
+        // 여기에 페이지 전환 코드 추가
+        // 예: 이전 페이지로 이동하는 로직 추가
+        newsBoard.classList.remove("fadeOut");
+    }, 500); // 애니메이션 지속 시간과 일치해야 함 (여기서는 0.5초)
+}
