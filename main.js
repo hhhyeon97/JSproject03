@@ -1,6 +1,10 @@
 
-const API_KEY = 'my key..'
-// https://newsapi.org/v2/top-headlines?pageSize=3&country=kr&apiKey=${API_KEY}
+// const API_KEY = 'my key'
+// https://newsapi.org/v2/top-headlines?&country=kr&apiKey=${API_KEY}
+// https://jspractice03.netlify.app/top-headlines?
+
+console.log("test !!!")
+
 let newsList = []
 const menus = document.querySelectorAll(".menus button")
 menus.forEach(menu=>menu.addEventListener("click",()=>getNewsByCategory(event)))
@@ -13,7 +17,6 @@ let page = 1
 const pageSize = 10
 const groupSize = 5
 
-
 // 중복되는 코드 묶기+에러 핸들링
 const getNews = async()=>{
     try {
@@ -22,6 +25,7 @@ const getNews = async()=>{
         
         const response = await fetch(url); // url 부른다
         const data = await response.json(); // json 형태로 뽑는다
+        console.log("ddd",data)
 
     if(response.status===200){
         
@@ -42,19 +46,19 @@ const getNews = async()=>{
 }
 
 // 기본 뉴스 
-const getLatesNews = async ()=>{
-    url = new URL(`https://jspractice03.netlify.app/top-headlines?pageSize=3`);
+const getLateNews = async ()=>{
+    url = new URL(`https://jspractice03.netlify.app/top-headlines?`);
     getNews();
 };
 // 함수 호출
-getLatesNews();
+getLateNews();
 
 
 // 카테고리 
 const getNewsByCategory = async(event)=>{
     const category = event.target.textContent.toLowerCase();
     console.log("category",category);
-    url = new URL(`https://jspractice03.netlify.app/top-headlines?category=${category}&pageSize=3`)
+    url = new URL(`https://jspractice03.netlify.app/top-headlines?category=${category}`)
     getNews();
 }
 
@@ -103,30 +107,30 @@ const errorRender =(errorMessage)=>{
     document.getElementById("newsBoard").innerHTML=errorHTML;
 }
 
-
 // pagination 
 const paginationRender=()=>{
     // totalResult
     // page
     // pageSize
     // totalPages
-    const totalPages = Math.ceil(totalResult/pageSize);
+    let totalPages = Math.ceil(totalResult/pageSize);
     // pageGroup
-    const pageGroup = Math.ceil(page/groupSize);
+    let pageGroup = Math.ceil(page/groupSize);
     // lastPage
-    const lastPage = pageGroup * groupSize;
+    let lastPage = pageGroup * groupSize;
     //마지막 페이지그룹이 그룹사이즈보다 작을 경우 lastPage = totalPage 처리
     if(lastPage > totalPages){
         lastPage=totalPages
     }
     // firstPage
-    const firstPage = lastPage - (groupSize-1)<=0? 1: lastPage - (groupSize-1);
+    let firstPage = lastPage - (groupSize-1)<=0? 1: lastPage - (groupSize-1);
 
     let paginationHTML = "";
 
     // 첫번째 페이지일 때를 제외하고 이전 링크 보이게 하기
     if (page !== 1) {
-        paginationHTML += `<li class="page-item" onclick="moveToPage(${page - 1})"><a class="page-link">Previous</a></li>`;
+        paginationHTML += `<li class="page-item" onclick="moveToPage(1)"><a class="page-link">&lt;&lt;</a></li>
+      <li class="page-item" onclick="moveToPage(${page - 1})"><a class="page-link">&lt;</a></li>`;
     }
 
     // 페이지 번호 추가
@@ -136,7 +140,8 @@ const paginationRender=()=>{
 
     // 마지막 페이지일 때 제외하고 다음 기능 보이게 하기 
     if (page !== totalPages) {
-        paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">Next</a></li>`;
+        paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">&gt;</a></li>
+        <li class="page-item" onclick="moveToPage(${totalPages})"><a class="page-link">&gt;&gt;</a></li>`;
     }
 
     document.querySelector(".pagination").innerHTML = paginationHTML;
@@ -148,7 +153,6 @@ const moveToPage=(pageNum)=>{
     page = pageNum; // page값 유동적으로 변경
     getNews()
 }
-
 
 // 메뉴바
 const toggleBtn = document.querySelector('.navbar-togglebtn');
@@ -178,8 +182,9 @@ const searchNews = async()=>{
         inputField.focus(); // 입력창으로 포커스
         return; // 검색 중지
     }
-    url = new URL(`https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}`)
-
+    url = new URL(`https://jspractice03.netlify.app/top-headlines?q=${keyword}`)
+    //https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}
+    //https://newsapi.org/v2/top-headlines?&country=kr&q=${keyword}&apiKey=${API_KEY}
     getNews();
 }
 
@@ -193,7 +198,7 @@ const mobileSearchNews = async()=>{
         mobileInputField.focus(); // 입력창으로 포커스
         return; // 검색 중지
     }
-    url = new URL(`https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}`)
+    url = new URL(`https://jspractice03.netlify.app/top-headlines?q=${keyword}`)
 
     getNews();
 }
