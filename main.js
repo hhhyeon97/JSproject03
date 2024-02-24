@@ -176,6 +176,7 @@ const searchNews = async()=>{
     getNews();
 }
 
+/*
 // 모바일 검색 기능
 const mobileInputField = document.getElementById("mobileInput");
 const mobileSearchNews = async()=>{
@@ -191,7 +192,7 @@ const mobileSearchNews = async()=>{
 
     getNews();
 }
-
+*/
 // 로고 클릭 시 다시 리셋되게 
 const totalNewsWrapper = document.querySelector("#title");
 const logoImage = totalNewsWrapper.querySelector("#totalNews");
@@ -207,12 +208,14 @@ inputField.addEventListener("keydown", function(event) {
         searchNews();
     }
 });
+
+/*
 mobileInputField.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         mobileSearchNews();
     }
 });
-
+*/
 
 // 페이지 전환 함수
 const nextPage = () => {
@@ -234,3 +237,11 @@ const prevPage = () => {
         newsBoard.classList.remove("fadeOut");
     }, 500); // 애니메이션 지속 시간과 일치해야 함 (여기서는 0.5초)
 }
+
+// 날짜
+const calenderArea=document.getElementById("calendarArea")
+const times=moment().format('YYYY년 MM월 DD일');
+calenderArea.innerHTML=`${times}`
+
+const calenderAreas=document.getElementById("calendarArea")
+calenderAreas.innerHTML=`${times}`

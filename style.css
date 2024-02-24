@@ -1,4 +1,7 @@
 
+* {
+    font-family: "Roboto", sans-serif;
+}
 
 a{
     color: inherit;
@@ -105,7 +108,10 @@ a{
     }
     #mobileSearch {
         display: block;
-    }	
+    }
+    #calendarArea {
+        display: none;
+    }
 }
 
 #inputArea {
@@ -174,4 +180,10 @@ footer h3{
     background-color: black;
     border-color: black;
     color: white;
+}
+
+#calendarArea {
+    position: relative;
+    left: 200px;
+    top : 65px;
 }
