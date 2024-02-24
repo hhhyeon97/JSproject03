@@ -217,6 +217,7 @@ mobileInputField.addEventListener("keydown", function(event) {
 });
 */
 
+
 // 페이지 전환 함수
 const nextPage = () => {
     const newsBoard = document.getElementById("newsBoard");
@@ -237,6 +238,34 @@ const prevPage = () => {
         newsBoard.classList.remove("fadeOut");
     }, 500); // 애니메이션 지속 시간과 일치해야 함 (여기서는 0.5초)
 }
+
+// 스크롤 
+// 페이지 상단으로 스크롤하는 함수
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 스크롤 부드럽게 이동
+    });
+}
+// 페이지가 로드되었을 때 실행되는 코드
+window.onload = function() {
+    // 페이지 상단으로 스크롤하는 버튼
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    // 버튼이 존재하면
+    if (scrollTopBtn) {
+        // 페이지를 스크롤할 때마다 실행되는 함수
+        window.addEventListener('scroll', function() {
+            // 현재 스크롤 위치가 300보다 크면 버튼을 보이게 함
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
+        // 버튼에 클릭 이벤트 추가
+        scrollTopBtn.addEventListener("click", scrollToTop);
+    }
+};
 
 // 날짜
 const calenderArea=document.getElementById("calendarArea")

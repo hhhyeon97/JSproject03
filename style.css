@@ -112,6 +112,10 @@ a{
     #calendarArea {
         display: none;
     }
+    #scrollTopBtn {
+        font-size: 20px; 
+        opacity: 0.4;
+      }
 }
 
 #inputArea {
@@ -183,7 +187,18 @@ footer h3{
 }
 
 #calendarArea {
-    position: relative;
-    left: 200px;
-    top : 65px;
+    position: absolute;
+    right: 200px;
+    top : 75px;
+}
+
+#scrollTopBtn {
+    position: fixed;
+    bottom: 35px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 30px;
 }
