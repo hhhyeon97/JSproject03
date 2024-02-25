@@ -67,7 +67,7 @@ const getNewsByCategory = async(event)=>{
 const render = () => {
 	const newsHtml = newsList.map(news => `<div class="row news">
 		<div class="col-lg-4" style="margin-bottom: 15px;">
-			<img onclick="window.open('${news.url}')" src="${news.urlToImage}" alt="뉴스 이미지" class="newsImage" onerror="imgError(this)">
+			<img style="border-radius:5px;" onclick="window.open('${news.url}')" src="${news.urlToImage}" alt="뉴스 이미지" class="newsImage" onerror="imgError(this)">
 		</div>
 		<div class="col-lg-8">
 			<h3 onclick="window.open('${news.url}')">${news.title}</h3>

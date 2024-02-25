@@ -90,6 +90,7 @@ a{
 	  flex-direction : column;
 	  align-items: flex-start;
 	  width: 100%;
+      border: none;
 	}
 	#menuIcon {
 	  display: block;
@@ -97,14 +98,28 @@ a{
 	.menus.active{
 		display: flex;
 	}
+    #title{
+        border-bottom: 2px solid rgb(230, 228, 228);
+        padding-bottom: 15px;
+    }
     #title img{
         width:180px;
     }
     #menuIcon{
         margin-top : 13px;
     }
-    #searchIcon,#searchInput,.searchBtn{
-        display: none;
+    #searchArea{
+        /*display: none;*/
+        position: absolute;
+        right:80px;
+        top:22px;
+    }
+    #searchInput{
+        position:absolute;
+        right: 95px;
+    }
+    .searchBtn {
+        right:40px;
     }
     #mobileSearch {
         display: block;
@@ -120,6 +135,8 @@ a{
         opacity: 0.3;
       }
 }
+
+
 
 #inputArea {
     position:absolute;
