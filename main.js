@@ -107,6 +107,9 @@ const paginationRender=()=>{
     let pageGroup = Math.ceil(page/groupSize);
     // lastPage
     let lastPage = pageGroup * groupSize;
+
+    // 페이지가 5 이하일 때는 최대 3개 페이지만 보여주기 -> 이거 다시
+
     //마지막 페이지그룹이 그룹사이즈보다 작을 경우 lastPage = totalPage 처리
     if(lastPage > totalPages){
         lastPage=totalPages
@@ -132,7 +135,13 @@ const paginationRender=()=>{
         paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">&gt;</a></li>
         <li class="page-item" onclick="moveToPage(${totalPages})"><a class="page-link">&gt;&gt;</a></li>`;
     }
-
+    // 페이지가 5 이하일 때는 이전 페이지와 다음 페이지 버튼을 모두 숨김
+    if (totalPages <= 5) {
+        paginationHTML = paginationHTML.replace(/<li class="page-item" onclick="moveToPage\(\d+\)"><a class="page-link">&lt;<\/a><\/li>/, "")
+                                       .replace(/<li class="page-item" onclick="moveToPage\(\d+\)"><a class="page-link">&lt;&lt;<\/a><\/li>/, "")
+                                       .replace(/<li class="page-item" onclick="moveToPage\(\d+\)"><a class="page-link">&gt;<\/a><\/li>/, "")
+                                       .replace(/<li class="page-item" onclick="moveToPage\(\d+\)"><a class="page-link">&gt;&gt;<\/a><\/li>/, "");
+    }
     document.querySelector(".pagination").innerHTML = paginationHTML;
 
 }
