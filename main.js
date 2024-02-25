@@ -67,13 +67,15 @@ const getNewsByCategory = async(event)=>{
 const render = () => {
 	const newsHtml = newsList.map(news => `<div class="row news">
 		<div class="col-lg-4" style="margin-bottom: 15px;">
-			<img src="${news.urlToImage}" alt="뉴스 이미지" class="newsImage" onerror="imgError(this)">
+			<img onclick="window.open('${news.url}')" src="${news.urlToImage}" alt="뉴스 이미지" class="newsImage" onerror="imgError(this)">
 		</div>
 		<div class="col-lg-8">
-			<h3>${news.title}</h3>
-			<p>${news.description == null || news.description == "" ? "내용없음": news.description.length > 200 ? news.description.substring(0, 200) + "..." : news.description}</p>
-			<div>${news.source.name || "no source"}  ${moment(news.publishedAt).fromNow()}</div>			
-		</div>
+			<h3 onclick="window.open('${news.url}')">${news.title}</h3>
+			<p onclick="window.open('${news.url}')">${news.description == null || news.description == "" ? "내용없음": news.description.length > 200 ? news.description.substring(0, 200) + "..." : news.description}</p>
+            <div style="display:flex; justify-content: space-between;">
+            <div style="color:gray;">${news.source.name || "no source"}</div><div style="color:lightgray;">${moment(news.publishedAt).fromNow()}</div>
+            </div>
+            </div>
 	</div>`
 	).join('');
 	document.getElementById('newsBoard').innerHTML = newsHtml;
@@ -256,7 +258,7 @@ window.onload = function() {
         // 페이지를 스크롤할 때마다 실행되는 함수
         window.addEventListener('scroll', function() {
             // 현재 스크롤 위치가 300보다 크면 버튼을 보이게 함
-            if (window.pageYOffset > 300) {
+            if (window.pageYOffset > 400) {
                 scrollTopBtn.style.display = 'block';
             } else {
                 scrollTopBtn.style.display = 'none';
@@ -268,9 +270,8 @@ window.onload = function() {
 };
 
 // 날짜
-const calenderArea=document.getElementById("calendarArea")
+const calenderArea=document.querySelector('.calendarArea')
+const calenderMobile=document.querySelector('.calendarArea-mobile')
 const times=moment().format('YYYY년 MM월 DD일');
 calenderArea.innerHTML=`${times}`
-
-const calenderAreas=document.getElementById("calendarArea")
-calenderAreas.innerHTML=`${times}`
+calenderMobile.innerHTML=`${times}`
