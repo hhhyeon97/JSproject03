@@ -65,26 +65,8 @@ a{
     font-size: 25px;
 }
 
-#mobileSearch {
-    display: none;
-    margin-left: 5px;
-}
-#mobileSearch input {
-    border: 2px solid lightgray;
-    border-radius: 6px;
-    outline: none;
-}
-#mobileSearch button {
-    border : 2px solid lightgray;
-    border-radius: 6px;
-}
-#mobileSearch button:hover {
-    background-color: white;
-    color:black;
-}
-
 /*768*/
-@media screen and (max-width: 950px){
+@media screen and (max-width: 768px){
 	.menus {
 	  display: none;
 	  flex-direction : column;
@@ -114,15 +96,15 @@ a{
         right:80px;
         top:22px;
     }
+    /*
     #searchInput{
         position:absolute;
         right: 95px;
     }
+    */
+
     .searchBtn {
         right:40px;
-    }
-    #mobileSearch {
-        display: block;
     }
     .calendarArea {
         display: none;
@@ -134,22 +116,35 @@ a{
         font-size: 17px; 
         opacity: 0.3;
       }
+      #searchTest {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #searchTest input {
+        width: 50%;
+      }
+      #searchTest button{
+        width : 20%;
+      }
 }
 
 
-
+/*
 #inputArea {
     position:absolute;
     left : 70px;
     display: none;
 }
-
+*/
+/*
 #searchInput {
     border-radius: 5px;
     border : 2px solid #404042;
     padding: 6px;
     margin-left: 5px;
 }
+*/
 
 .searchBtn {
     position: absolute;
@@ -228,4 +223,24 @@ footer h3{
     padding: 10px 20px;
     cursor: pointer;
     font-size: 30px;
+}
+
+
+#searchTest{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+}
+#searchTest input {
+    padding: 5px;
+    border-radius: 5px;
+    border-color: black;
+    outline: none;
+    width: 60%;
+
+}
+#searchTest button {
+    margin-left: 10px;
 }
