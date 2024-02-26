@@ -96,13 +96,7 @@ a{
         right:80px;
         top:22px;
     }
-    /*
-    #searchInput{
-        position:absolute;
-        right: 95px;
-    }
-    */
-
+   
     .searchBtn {
         right:40px;
     }
@@ -129,22 +123,6 @@ a{
       }
 }
 
-
-/*
-#inputArea {
-    position:absolute;
-    left : 70px;
-    display: none;
-}
-*/
-/*
-#searchInput {
-    border-radius: 5px;
-    border : 2px solid #404042;
-    padding: 6px;
-    margin-left: 5px;
-}
-*/
 
 .searchBtn {
     position: absolute;

@@ -204,7 +204,6 @@ inputField.addEventListener("keydown", function(event) {
     }
 });
 
-
 // 페이지 전환 함수
 const nextPage = () => {
     const newsBoard = document.getElementById("newsBoard");
