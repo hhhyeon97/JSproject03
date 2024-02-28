@@ -1,5 +1,5 @@
 
-// const API_KEY = 'my key'
+ const API_KEY = 'secret key'
 // https://newsapi.org/v2/top-headlines?&country=kr&apiKey=${API_KEY}
 // https://jspractice03.netlify.app/top-headlines?
 
@@ -60,6 +60,8 @@ const getNewsByCategory = async(event)=>{
     page = 1;
     console.log("category",category);
     url = new URL(`https://jspractice03.netlify.app/top-headlines?category=${category}`)
+    //https://jspractice03.netlify.app/top-headlines?category=${category}
+    //https://newsapi.org/v2/top-headlines?&country=kr&category=${category}&apiKey=${API_KEY}
     getNews();
 }
 
@@ -98,9 +100,8 @@ const errorRender =(errorMessage)=>{
 
 // pagination 
 const paginationRender=()=>{
-    // totalResult
-    // page
-    // pageSize
+    
+    // totalResult, page, pageSize
     // totalPages
     let totalPages = Math.ceil(totalResult/pageSize);
     // pageGroup
@@ -182,7 +183,7 @@ const searchNews = async()=>{
         return; // 검색 중지
     }
     url = new URL(`https://jspractice03.netlify.app/top-headlines?q=${keyword}`)
-    //https://jspractice03.netlify.app/top-headlines?country=kr&q=${keyword}
+    //https://jspractice03.netlify.app/top-headlines?q=${keyword}
     //https://newsapi.org/v2/top-headlines?&country=kr&q=${keyword}&apiKey=${API_KEY}
     getNews();
 }
@@ -254,8 +255,10 @@ window.onload = function() {
 };
 
 // 날짜
+/*
 const calenderArea=document.querySelector('.calendarArea')
 const calenderMobile=document.querySelector('.calendarArea-mobile')
 const times=moment().format('YYYY년 MM월 DD일');
 calenderArea.innerHTML=`${times}`
 calenderMobile.innerHTML=`${times}`
+*/

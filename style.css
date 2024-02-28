@@ -195,7 +195,7 @@ footer h3{
 #scrollTopBtn {
     position: fixed;
     bottom: 35px;
-    right: 20px;
+    right: 5px;
     z-index: 99;
     border: none;
     padding: 10px 20px;
